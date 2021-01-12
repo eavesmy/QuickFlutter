@@ -7,7 +7,7 @@ import 'http_config.dart';
 
 /// Http请求工具类
 
-class CIHttp {
+class Http {
   /// dio instance
   static final _defaultDio = Dio()
     ..options.baseUrl = HttpConfig.HTTP_HOST
@@ -17,7 +17,7 @@ class CIHttp {
     ..options.receiveTimeout = Duration(seconds: 15).inMilliseconds
     ..options.sendTimeout = Duration(seconds: 15).inMilliseconds
     ..interceptors.add(Interceptor())
-    ..transformer = _CIHttpTransformer();
+    ..transformer = _HttpTransformer();
 
   static Future<Response<T>> request<T>({
     Dio dio,
@@ -70,15 +70,13 @@ class HttpMethod {
   static const String OPTIONS = "OPTIONS";
 }
 
-/// 客户端接口错误码，错误码均为负数
 class ClientErrorCode {
   ClientErrorCode._();
 
-  /// 业务接口请求失败
   static const String BUSINESS_FAILED = "-100";
 }
 
-class _CIHttpTransformer extends DefaultTransformer {
+class _HttpTransformer extends DefaultTransformer {
   @override
   Future transformResponse(RequestOptions options, ResponseBody response) {
     print("""
@@ -92,7 +90,7 @@ Headers:${response.headers}""");
 
     if (response.statusCode < 200 || response.statusCode >= 400) {
       print("-------------------- HTTP END --------------------");
-      return Future.error('请求失败:${response.statusCode}');
+      return Future.error('Request failed:${response.statusCode}');
     }
     return super.transformResponse(options, response).then((value) {
       print("""Body:${JsonEncoder.withIndent('  ').convert(value)} 
@@ -101,7 +99,7 @@ Headers:${response.headers}""");
         if (value['success'] == true) {
           return value['data'];
         } else {
-          throw '请求失败:${ClientErrorCode.BUSINESS_FAILED}';
+          throw 'Request failed:${ClientErrorCode.BUSINESS_FAILED}';
         }
       } else {
         return value;
