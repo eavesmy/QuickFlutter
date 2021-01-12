@@ -45,7 +45,7 @@ class Http {
       if (error is DioError) {
         throw error.message;
       }
-    }).then((value) => null);
+    });
   }
 
   static String fillPath(String path, Map<String, dynamic> pathParams) {
@@ -95,6 +95,7 @@ Headers:${response.headers}""");
     return super.transformResponse(options, response).then((value) {
       print("""Body:${JsonEncoder.withIndent('  ').convert(value)} 
 -------------------- HTTP END --------------------""");
+      return value;
       if (options.baseUrl == HttpConfig.HTTP_HOST && value is Map) {
         if (value['success'] == true) {
           return value['data'];

@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
 
 void main() {
-	runApp(MaterialApp(home: MyApp()));
+	runApp(MaterialApp(home: MyApp(),theme: ThemeData(primaryColor: Colors.teal)));
 
 	/*
   if(Platform.isAndroid) {

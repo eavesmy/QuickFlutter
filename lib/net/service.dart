@@ -3,10 +3,10 @@ import 'http.dart';
 class Service {
   Service._();
 
-  static Future<List<String>> getAllProject() {
-    return Http.request<List<String>>(
-      path: '/all/projects',
-      method: HttpMethod.GET,
-    ).then((value) => value.data);
+  static Future<Map<String,dynamic>> index() {
+    return Http.request<Map<String,dynamic>>(
+      path: '/movie/index',
+      method: HttpMethod.POST,
+    ).then((value) => new Map<String, dynamic>.from(value.data));
   }
 }
