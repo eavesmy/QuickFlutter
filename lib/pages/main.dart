@@ -1,10 +1,4 @@
 import 'package:flutter/material.dart';
-import './init.dart';
-
-void main() async {
-	init()
-	runApp(MyApp());
-}
 
 class MyApp extends StatelessWidget {
   @override
@@ -14,7 +8,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-	  home: Container()
+	  home: Container(child: Text("Hello world"),)
     );
   }
 }

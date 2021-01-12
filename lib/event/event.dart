@@ -4,13 +4,9 @@ import 'package:event_bus/event_bus.dart';
 
 class Event {
 
-	Event.publish(){
-	
-	}
+	Event.publish(){}
 
-	Event.listen(){
-	
-	}
+	Event.listen(){}
 }
 
 init() {
