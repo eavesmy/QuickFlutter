@@ -8,6 +8,7 @@ part of domain;
 
 Movie _$MovieFromJson(Map<String, dynamic> json) {
   return Movie(
+    id: json['id'] as int,
     name: json['name'] as String,
     description: json['description'] as String,
     img: json['img'] as String,
@@ -17,6 +18,7 @@ Movie _$MovieFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$MovieToJson(Movie instance) => <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
       'description': instance.description,
       'img': instance.img,

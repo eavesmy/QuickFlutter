@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'dart:io';
 import 'package:flutter/widgets.dart';
 
 import 'http_config.dart';
@@ -31,6 +32,7 @@ class Http {
   }) {
     assert(path != null && path.trim().isNotEmpty, '请求Path不能为空');
     assert(method != null && method.trim().isNotEmpty, '请求Method不能为空');
+
     final _response = (dio ?? _defaultDio).request<T>(
       fillPath(path, pathParams),
       data: body,
@@ -41,6 +43,7 @@ class Http {
         baseUrl: baseUrl,
       ),
     );
+    
     return _response.catchError((error, [StackTrace stackTrace]) {
       if (error is DioError) {
         throw error.message;

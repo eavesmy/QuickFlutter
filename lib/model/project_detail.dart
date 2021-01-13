@@ -14,6 +14,7 @@ part of domain;
 
 @JsonSerializable()
 class Movie {
+  int id;
   String name;
   String description;
   String img;
@@ -22,6 +23,7 @@ class Movie {
   List<String> category;
 
   Movie({
+    this.id,
     this.name,
     this.description,
     this.img,
